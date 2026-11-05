@@ -6,6 +6,7 @@ import { SimplifiedLetterCard } from './components/SimplifiedLetterCard';
 import { SystemDiagramModal } from './components/SystemDiagramModal';
 import { RapLetter, ClarificationQuestion, AgentResponse, HIP_HOP_PHOTOS } from './types/agent';
 import { beatEngine } from './utils/audioEngine';
+import { createClientFallbackLetter } from './utils/clientFallback';
 import { Info, PlusCircle } from 'lucide-react';
 
 export default function App() {
@@ -66,7 +67,9 @@ export default function App() {
         }),
       });
 
-      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      if (!res.ok) {
+        throw new Error(`Server returned ${res.status}`);
+      }
 
       const result: AgentResponse = await res.json();
 
@@ -83,8 +86,12 @@ export default function App() {
         setStage('results');
       }
     } catch (err: unknown) {
-      console.error(err);
-      setErrorMessage('Could not generate rap letter. Please try again.');
+      console.warn('Backend API unavailable or returned error, activating client-side CFR generator:', err);
+      // Fallback generates customized letter right away so user is never blocked
+      const fallback = createClientFallbackLetter(frustration, target);
+      setLetter(fallback.letter);
+      setAgentReaction(fallback.reaction);
+      setStage('results');
     } finally {
       setIsLoading(false);
     }
