@@ -1,0 +1,6 @@
+{
+  "name": "CFR: Cathartic Fun Rapper",
+  "description": "An empowering AI writing agent that transforms personal frustrations and grievances into punchy, cathartic rap letters paired with dynamic visuals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

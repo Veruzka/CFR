@@ -1,0 +1,55 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-display: 'Outfit', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+
+    /* Palette derived from user attached photo: */
+    --color-bg-deep: #0c131f;
+    --color-surface: #121b2b;
+    --color-surface-card: #162236;
+    --color-border: #22334d;
+    --color-coral: #e3554e;
+    --color-ochre: #cb902c;
+    --color-blue: #2b52d9;
+    --color-pink: #d99bb2;
+    --color-green: #1b4e3b;
+    --color-cream: #f5f1e8;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-deep);
+    color: var(--color-cream);
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Subtle scrollbar using new palette */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0c131f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22334d;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cb902c;
+}
